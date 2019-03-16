@@ -16,5 +16,5 @@ Project1 :Threads
  In this way, the system will record the sleeping time of the thread, and block it until the time is over. During blocking, thread will sleep and will not affect the work of CPU. The thread will unblock only when the `ticks_count` is getting to 0.
 * ### Synchronization
   * Race condition will not happen, because for each thread, it has its own value of `ticks_blocked` as a local variable. when mutiple threads call the `timer_sleep()` simultaneously, it will calculate the sleeping time and wake up it in its own area and will not affect others' status.
-  * if ticks is a invalid value, the thread will not sleep successfully, so it will avoid faults.
+  * if ticks is a invalid value, the thread will not sleep successfully, so it can avoid some faults.
   
