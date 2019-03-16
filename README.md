@@ -25,4 +25,5 @@ Project1 :Threads
   *  `void thread_unblock (struct thread *t)`:change the `list_push_back` to `list_insert_ordered` , this function is in `thread.c`, and `list_insert_ordered` and `list_push_back` are implemented in list.c which is in lib/kernel. 
   *  `void thread_yield (void)`: change the `list_push_back` to `list_insert_ordered` , this function is in `thread.c`, and `list_insert_ordered` and `list_push_back` are implemented in list.c which is in lib/kernel.
   *  `static void init_thread (struct thread *t, const char *name, int priority)`:change the `list_push_back` to `list_insert_ordered` , this function is in `thread.c`, and `list_insert_ordered` and `list_push_back` are implemented in list.c which is in lib/kernel.
+  * `struct thread`: add a member `int base_priority;`this integer is used to store the value of priority when the priority donation has not happened.
   
