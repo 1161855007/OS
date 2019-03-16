@@ -19,4 +19,7 @@ Project1 :Threads
   * if ticks is a invalid value, the thread will not sleep successfully, so it can avoid some faults.
 * ### Rationale
   * I used to consider that adding the calculation of `ticks_blocked` in `timer_sleep()`, but when I turned to write the part of synchronization in this design review, I found that if I do so, race condition will not be avoided. When mutiple threads call the `timer_sleep()` simultaneously, it cannot tell which value is owned by which thread. Therefore, I decide to complete a function called `thread_check` in `thread.c` to make `ticks_blocked` calculated in each thread's area.
+## Task 2: Priority Scheduler
+* ### Data structures and functions
+  *  
   
