@@ -21,9 +21,11 @@ Project1 :Threads
   * I used to consider that adding the calculation of `ticks_blocked` in `timer_sleep()`, but when I turned to write the part of synchronization in this design review, I found that if I do so, race condition will not be avoided. When mutiple threads call the `timer_sleep()` simultaneously, it cannot tell which value is owned by which thread. Therefore, I decide to complete a function called `thread_check` in `thread.c` to make `ticks_blocked` calculated in each thread's area.
 ## Task 2: Priority Scheduler
 * ### Data structures and functions
-  *  `bool thread_cmp_priority (const struct list_elem *a, const struct list_elem *b)`: Used for comparing the priority of thread a and thread b, and return a bool value.
+  *  `bool compare_priority (const struct list_elem *a, const struct list_elem *b)`: Used for comparing the priority of thread a and thread b, and return a bool value.
   *  `void thread_unblock (struct thread *t)`:change the `list_push_back` to `list_insert_ordered` , this function is in `thread.c`, and `list_insert_ordered` and `list_push_back` are implemented in list.c which is in lib/kernel. 
   *  `void thread_yield (void)`: change the `list_push_back` to `list_insert_ordered` , this function is in `thread.c`, and `list_insert_ordered` and `list_push_back` are implemented in list.c which is in lib/kernel.
   *  `static void init_thread (struct thread *t, const char *name, int priority)`:change the `list_push_back` to `list_insert_ordered` , this function is in `thread.c`, and `list_insert_ordered` and `list_push_back` are implemented in list.c which is in lib/kernel.
-  * `struct thread`: add a member `int base_priority;`this integer is used to store the value of priority when the priority donation has not happened.
-  
+  * `struct thread`: add  member `int base_priority;`this integer is used to store the value of priority when the priority donation has not happened. add member `struct lock *waiting;` The lock that the thread is waiting for, if not waiting for any lock, this part can be null. add member `struct list locks;`List of locks that the thread has. add member `struct list waiting_lock;`The list of other threads waiting on locks , they are the potential donor to this thread.
+  * `void donate_priority (struct thread *t)` implement the donation of priority.
+  * `void back_priority (struct thread *t)` undoing donations when a lock is released.
+
