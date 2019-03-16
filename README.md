@@ -29,6 +29,9 @@ Project1 :Threads
   * `void donate_priority (struct thread *t)` implement the donation of priority.
   * `void back_priority (struct thread *t)` undoing donations when a lock is released.
 * ### Algorithms
+  * 
+* ### Synchronization
+* ### Rationale
 
 
   
