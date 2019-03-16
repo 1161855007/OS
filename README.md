@@ -10,7 +10,6 @@ Project1 :Threads
   * `ticks_count` will record the sleep time of the thread.
   * Block the thread.
   * Every tick the system will check whether the `ticks_count` is 0. if yes, unblock the thread.
-  * Every tick, the `ticks_count` will minus 1.
-  <br>
+  * Every tick, the `ticks_count` will minus 1.<br>
  In this way, the system will record the sleeping time of the thread, and block it until the time is over. During blocking, thread will sleep and will not affect the work of CPU. The thread will unblock only when the `ticks_count` is getting to 0.
   
