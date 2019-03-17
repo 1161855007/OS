@@ -39,7 +39,13 @@ Project1 :Threads
   *  when releasing the lock, we should check the current priority and base priority of the thread, and it is possilble that the thread is donated again when releasing beacuse a thread may hold more than one lock.
   *  In the list of waiters, front threads should have higher priority, and higher priority thread can be inserted into the queue. Therefore, it make sure that highest priority waiting thread can acquire lock first. 
   *  All relative information of each thread must update data as soon as possible.
-  *
+  *  At first, here is a simple case:
+     *   When a thread holds a lock right now, the thread in the waiting list should check that whether the priority is higher than itself.
+     *   if the waiting thread has a higher priority than lock holder, the waiting thread should begin the priority donation.
+     *   we can set the lock holder the same priority to the waiting thread, so the priority is the real priority for this lock holder. If not do so, some medium thread may execute earlier than the holder, and it cause that the waiting thread do not enjoy its right of priority. Because in fact, the medium thread execute before the higher waiting thread. It is a wrong order.
+     *   After the lock thread release, it will set back its priority immediately. And the waiting higher priority thread can acquire the lock successfully then.
+  *  Now, I will try to give a more complex situation:
+     *  
 * ### Synchronization
 * ### Rationale
 
