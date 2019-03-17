@@ -54,8 +54,15 @@ Project1 :Threads
   * To sum up, priority scheduler is to implement the queue that base on priority of each thread. Rule of priority donation is essentially to find the real priority of each thread. Only with priority donation, thread can acquire lock in the right order.
     
 * ### Synchronization
+  * Beacuse the system is mutiple thread, many function may be used at the same time. 
+  * `back_priority` will not be affacted, because it has the argument **thread t**. When there is mutiple thread that need to come back to their base priority, they can update their priority respectively.
+  * `donate_priority`will not be affacted, because it has the argument **thread t**. we can set the new priority of the thread t without other threads influence.
+  * `init_thread ` will not be affacted, because it also has the argument to tell which thread is to initialize.
+  * `thread_set_priority` is not good for avoid race condition, we should change it to locate which thread is setting priority.
 * ### Rationale
-
+  * To be honest, this part is too difficult and I haven't do some real test to demonstrate that my design is good enough. By now, I take some simple cases into my consideration and it is doomed not thorough enough at all. The rule of priority donation is rational because we follow the real priority to order the thread in queue, no matter how many thread is in priority donation chain; no matter how many locks one holder has.
+## Task 3: Multi-level Feedback Queue Scheduler (MLFQS)
+  * ### Data structures and functions
 
   
 
