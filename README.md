@@ -62,7 +62,14 @@ Project1 :Threads
 * ### Rationale
   * To be honest, this part is too difficult and I haven't do some real test to demonstrate that my design is good enough. By now, I take some simple cases into my consideration and it is doomed not thorough enough at all. The rule of priority donation is rational because we follow the real priority to order the thread in queue, no matter how many thread is in priority donation chain; no matter how many locks one holder has.
 ## Task 3: Multi-level Feedback Queue Scheduler (MLFQS)
-  * ### Data structures and functions
+* ### Data structures and functions
+  * `void thread_set_nice (int nice UNUSED)`: the funciton in *thread.c* which hasn't been implemented.
+  * `int thread_get_nice (void)`: the funciton in *thread.c* which hasn't been implemented.
+  * `int thread_get_load_avg (void)`: the funciton in *thread.c* which hasn't been implemented.
+  * `int thread_get_recent_cpu (void)`: the funciton in *thread.c* which hasn't been implemented.
+  * `struct thread`: add member `int nice;`add member `int recent_cpu;
+* ### Algorithms
+ `
 
   
 
