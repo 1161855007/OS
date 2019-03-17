@@ -45,7 +45,10 @@ Project1 :Threads
      *   we can set the lock holder the same priority to the waiting thread, so the priority is the real priority for this lock holder. If not do so, some medium thread may execute earlier than the holder, and it cause that the waiting thread do not enjoy its right of priority. Because in fact, the medium thread execute before the higher waiting thread. It is a wrong order.
      *   After the lock thread release, it will set back its priority immediately. And the waiting higher priority thread can acquire the lock successfully then.
   *  Now, I will try to give a more complex situation:
-     *  
+     *  If the lock holder has more than one lock, we should decide the donate order to this lock.
+     *  As the situation that has one lock, we should confirm whether there is donor to this thread.
+     *  We should set the lock holder as the same priority to the highset waiting thread's priority, if the lock that the highest priority thread want has released, we should change the lock holder's priority to the second highest thread's priority. And the rest rule, is as the above, if it holds more than two lock.
+     *  I guess it is possible to have a condition that there are more than one thread holds more than one locks. To solve this problem, we should judge who is real higher priority thread. I have two try: 1.) We can add all the priority together to decide who has a higher priority. 2.) We can choose the holder which has more donor a higher priority. I prefer the second one, but do not has some solid reason. Maybe the add will cause a overflow is one. It is difficult to decide which one as a higher priority thread, I may test more sample to find the final way.
 * ### Synchronization
 * ### Rationale
 
