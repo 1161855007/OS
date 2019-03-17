@@ -48,7 +48,11 @@ Project1 :Threads
      *  If the lock holder has more than one lock, we should decide the donate order to this lock.
      *  As the situation that has one lock, we should confirm whether there is donor to this thread.
      *  We should set the lock holder as the same priority to the highset waiting thread's priority, if the lock that the highest priority thread want has released, we should change the lock holder's priority to the second highest thread's priority. And the rest rule, is as the above, if it holds more than two lock.
-     *  I guess it is possible to have a condition that there are more than one thread holds more than one locks. To solve this problem, we should judge who is real higher priority thread. I have two try: 1.) We can add all the priority together to decide who has a higher priority. 2.) We can choose the holder which has more donor a higher priority. I prefer the second one, but do not has some solid reason. Maybe the add will cause a overflow is one. It is difficult to decide which one as a higher priority thread, I may test more sample to find the final way.
+     *  I guess it is possible to have a condition that there are more than one thread holds more than one locks. To solve this problem, we should judge who is real higher priority thread. I have two try: 1.) We can add all the priority together to decide who has a higher priority. 2.) We can choose the holder which has more donor a higher priority. I prefer the second one, but do not has some solid reason. Maybe the add will cause a overflow is one. It is difficult to decide which one as a higher priority thread, I may test more samples to find the final way.
+  * There is a possible special case:
+     * when the priority has a donation chain, we should set the lock holder's priority to the highest priority in chain. So it is possilble to find that the next thread has a lower priority that the lock holder. It is nothing and we just need to continue our priority chain. 
+  * To sum up, priority scheduler is to implement the queue that base on priority of each thread. Rule of priority donation is essentially to find the real priority of each thread. Only with priority donation, thread can acquire lock in the right order.
+    
 * ### Synchronization
 * ### Rationale
 
