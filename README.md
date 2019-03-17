@@ -67,7 +67,7 @@ Project1 :Threads
   * `int thread_get_nice (void)`: the funciton in *thread.c* which hasn't been implemented.
   * `int thread_get_load_avg (void)`: the funciton in *thread.c* which hasn't been implemented.
   * `int thread_get_recent_cpu (void)`: the funciton in *thread.c* which hasn't been implemented.
-  * `struct thread`: add member `int nice;`add member `int recent_cpu;
+  * `struct thread`: add member `int nice;`add member `int recent_cpu;`
 * ### Algorithms
  `
 
