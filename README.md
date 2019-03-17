@@ -3,7 +3,7 @@ Project1 :Threads
 ## 11612125 陈新炜
 ## Task 1: Efficient Alarm Clock
 * ### Data structures and functions
-  * `struct thread`: add a member `int64_t ticks_count;`in the struct. The struct is in *thread.h*, **ticks_count** will be used to count the rest ticks of a sleeping thread. If **ticks_count** is 0, it means that the thread will be woke up to CPU.
+  * `c struct thread`: add a member `int64_t ticks_count;`in the struct. The struct is in *thread.h*, **ticks_count** will be used to count the rest ticks of a sleeping thread. If **ticks_count** is 0, it means that the thread will be woke up to CPU.
   * `void timer_sleep (int64_t ticks)`: The function is in *timer.c*, add a judge in `timer_sleep`, the input **ticks** should be valid.
   * `void thread_check (struct thread *t)`: This function will be written in *thread.c*, and is setted to confirm the status of each thread and is aimed to avoid race condition. When **ticks_count** is 0, it will unblock the blocked thread. Or "wake up the sleeping thread".
 * ### Algorithms
