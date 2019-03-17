@@ -80,6 +80,12 @@ Project1 :Threads
   *  In this part, we use the given formula to implement MLFQS. The formula is designed well and is based on float calculation. I haven't find any hidden problem in the given design. I think the concept of MLFQS is excellent and rational.
 
 ## Design Document Additional Questions
+ |timer ticks | R(A) | R(B) | R(C) | P(A) | P(B) | P(C)| thread to run |
+ | -------- | -----: | :----: | :----: | :----: | :----: | :----: | :----: | 
+ | 香蕉 | $1 | 5 | 
+ | 苹果 | $1 | 6 | 
+ | 草莓 | $1 | 7 |
+
  
 
   
