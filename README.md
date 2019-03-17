@@ -75,23 +75,25 @@ Project1 :Threads
   * recent_cpu = (2 × load_avg)/(2 × load_avg + 1) × recent_cpu + nice
   * load_avg = (59/60)× load_avg + (1/60) × ready_threads
 * ### Synchronization
-  * each thread in queue has different priority and they can be told from each other, so I think there won't be problem in this part.
+  * each thread in queue can be told from each other, so I think there won't be problem in this part.
 * ### Rationale
-  *  In this part, we use the given formula to implement MLFQS. The formula is designed well and is based on float calculation. I haven't find any hidden problem in the given design. I think the concept of MLFQS is excellent and rational.
-
+  *  In this part, we use the given formula to implement MLFQS. The formula is designed well and is based on float calculation. The hidden problem is that which thread to run when there are more than one highest priority thread. However, we can easily solve it by choosing the lowest value of recent_cpu. If recent_cpu is the same, I think we can choose it randomly because it won't influence much in our system. and with this rule, lower priority thread is possible to run in CPU, which is what our MLFQS wants.
 ## Design Document Additional Questions
  |timer ticks | R(A) | R(B) | R(C) | P(A) | P(B) | P(C)| thread to run |
  | -------- | -----: | :----: | :----: | :----: | :----: | :----: | :----: | 
- | 0 |  |  |  |  |  |  |  |
- | 4 |  |  |  |  |  |  |  |
- | 8 |  |  |  |  |  |  |  |
- | 12 |  |  |  |  |  |  |  |
- | 16 |  |  |  |  |  |  |  |
- | 20 |  |  |  |  |  |  |  |
- | 24 |  |  |  |  |  |  |  |
- | 28 |  |  |  |  |  |  |  |
- | 32 |  |  |  |  |  |  |  |
- | 36 |  |  |  |  |  |  |  |
+ | 0 | 0 | 0 | 0 | 63 | 61 | 59 | A |
+ | 4 | 4 | 0 | 0 | 62 | 61 | 59 | A |
+ | 8 | 8 | 0 | 0 | 61 | 61 | 59 | B |
+ | 12 | 8 | 4 | 0 | 61 | 60 | 59 | A |
+ | 16 | 12 | 4 | 0 | 60 | 60 | 59 | B |
+ | 20 | 12 | 8 | 0 | 60 | 59 | 59 | A |
+ | 24 | 16 | 8 | 0 | 59 | 59 | 59 | C |
+ | 28 | 16 | 8 | 4 | 59 | 59 | 58 | B |
+ | 32 | 16 | 12 | 4 | 59 | 58 | 58 | A |
+ | 36 | 20 | 12 | 4 | 58 | 58 | 58 | C |
+ 
+ 
+ yes, when the value of priority is equal, it is not sure which thread to run. As I write in rationale, we can choose the one which has lower recent_cpu. If recent_cpu is equal, I think randomly choose one thread is ok. With this rule, lower priority thread is possible to run in CPU, which is what our MLFQS wants.
 
  
 
