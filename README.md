@@ -69,7 +69,18 @@ Project1 :Threads
   * `int thread_get_recent_cpu (void)`: the funciton in *thread.c* which hasn't been implemented.
   * `struct thread`: add member `int nice;`add member `int recent_cpu;`
 * ### Algorithms
- `
+  * Scheduler has 64 priorities and thus 64 ready queues, numbered 0 ( PRI_MIN ) through 63 ( PRI_MAX ) ,and lower numbers correspond to lower priorities.
+  * Thread priority is calculated initially at thread initialization. It is also recalculated once every fourth clock tick, for every thread.
+  * priority = PRI_MAX − (recent_cpu/4) − (nice×2)
+  * recent_cpu = (2 × load_avg)/(2 × load_avg + 1) × recent_cpu + nice
+  * load_avg = (59/60)× load_avg + (1/60) × ready_threads
+* ### Synchronization
+  * each thread in queue has different priority and they can be told from each other, so I think there won't be problem in this part.
+* ### Rationale
+  *  In this part, we use the given formula to implement MLFQS. The formula is designed well and is based on float calculation. I haven't find any hidden problem in the given design. I think the concept of MLFQS is excellent and rational.
+
+## Design Document Additional Questions
+ 
 
   
 
