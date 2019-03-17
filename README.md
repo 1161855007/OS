@@ -29,7 +29,13 @@ Project1 :Threads
   * `void donate_priority (struct thread *t)` implement the donation of priority.
   * `void back_priority (struct thread *t)` undoing donations when a lock is released.
 * ### Algorithms
-  * 
+  *  when a higher priority thread is waiting for acquiring a lock, which is held by a lower priority thread, it should donate its priority to the lower priority thread and record its current base priority. In addition, if this lock is held by other thread, which means that there is a list waiting for the lock, we need to donate the priority recursively.
+  *  The thread which has the most donor should be setted as the max priority. Because it is the source user of the lock, and it needs to release the lock as soon as possible.
+  *  When there is a list waiting for the lock, we should make the list as a priority queue. Therefore, higher-priority thread will be able to use lock earlier.
+  *  During the priority donation, the value of priority for each thread should be updated immediately. If there is a delay of update, the higher-priority thread may not get back his priority and miss the chance to acquire the lock.
+  *  During the priority donation, we should make sure that the value of priority after donated is lager than the current priority. If not, do not execute the instruction.
+  *  When the lock is released, beneficiary thread and donor thread should update their priority to base priority immediately.
+  *  
 * ### Synchronization
 * ### Rationale
 
