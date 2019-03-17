@@ -35,7 +35,11 @@ Project1 :Threads
   *  During the priority donation, the value of priority for each thread should be updated immediately. If there is a delay of update, the higher-priority thread may not get back his priority and miss the chance to acquire the lock.
   *  During the priority donation, we should make sure that the value of priority after donated is lager than the current priority. If not, do not execute the instruction.
   *  When the lock is released, beneficiary thread and donor thread should update their priority to base priority immediately.
-  *  
+  *  If priority changed when releasing the lock, it is permitted to change the order in waiting queue.
+  *  when releasing the lock, we should check the current priority and base priority of the thread, and it is possilble that the thread is donated again when releasing beacuse a thread may hold more than one lock.
+  *  In the list of waiters, front threads should have higher priority, and higher priority thread can be inserted into the queue. Therefore, it make sure that highest priority waiting thread can acquire lock first. 
+  *  All relative information of each thread must update data as soon as possible.
+  *
 * ### Synchronization
 * ### Rationale
 
